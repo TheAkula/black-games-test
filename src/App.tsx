@@ -1,9 +1,8 @@
+import { MainScreen } from "./screens/main-screen"
+
 function App() {
-  
   return (
-    <>
-      
-    </>
+    <MainScreen />
   )
 }
 

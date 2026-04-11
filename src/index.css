@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+@theme {
+  /* Цвета */
+  --color-background: #39373A;
+  --color-primary: #A62B30;
+  --color-secondary: #F4F5F0;
+
+  /* Радиус */
+  --radius-radius50: 50px;
+
+  /* Размеры */
+  --spacing-popup-w: 540px;
+  --spacing-popup-h: 547px;
+  --spacing-popup-icon-w: calc(145.35/540 * 100%);
+  --spacing-popup-icon-h: calc(145.35/547 * 100%);
+
+  /* Отступы */
+  --spacing-popup-icon-inset-top: 37px;
+}
