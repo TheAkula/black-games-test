@@ -29,25 +29,86 @@
   --spacing-popup-h: 547px;
   --spacing-popup-icon-w: 145.35px;
   --spacing-popup-icon-h: 145.35px;
+  --spacing-scroll-text-max-width: 320px;
+  --spacing-scroll-text-height: 150px;
 
   /* Шрифты */
   --font-header: 'Ruslan-Display';
   --font-text: 'AlumniSans';
   --font-button: 'Ruslan-Display';
+  --font-paragraph: 'Inter', sans-serif;
 
   --text-header: 48px;
   --text-p: 48px;
   --text-button: 32px;
+  --text-paragraph: 10px;
 
   --shadow-button: 0 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
 @layer components {
+  .btn-effects {
+    @apply transition-all duration-200 hover:brightness-110 active:scale-95 active:brightness-90 focus:outline-none cursor-pointer;
+  }
+
   .btn-primary {
     @apply bg-primary font-button px-[43px] pt-[22px] pb-[13px] text-button text-secondary rounded-[100px] shadow-button;
   }
 
   .btn-control {
-    @apply bg-primary opacity-80 w-[50px] h-[50px] rounded-full shadow-button;
+    @apply bg-primary/80 w-[50px] h-[50px] rounded-full shadow-button cursor-pointer;
   }
+}
+
+.os-theme-custom {
+  --os-handle-bg: color-mix(in srgb, var(--color-text), transparent 50%) !important;
+  --os-handle-bg-hover: color-mix(in srgb, var(--color-text), transparent 40%) !important;
+  --os-handle-bg-active: color-mix(in srgb, var(--color-text), transparent 30%) !important;
+  --os-handle-border-radius: 5px !important;
+  --os-handle-perpendicular-size: 15px !important;
+  --os-handle-perpendicular-size-hover: 15px !important;
+  --os-handle-perpendicular-size-active: 15px !important;
+
+  --os-size: 27px !important;
+  --os-padding-perpendicular: 4px !important;
+  --os-padding-axis: 25px !important;
+}
+
+.os-theme-custom .os-scrollbar-handle {
+  left: 2px;
+}
+
+.overlay-scrollbar {
+  position: relative;
+}
+
+.overlay-scrollbar-track-back {
+  width: 19px;
+  right: 7px;
+  background-color: color-mix(in srgb, var(--color-text), transparent 80%);
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  border-radius: 10px;
+}
+
+.overlay-scrollbar .overlay-scrollbar-control {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  z-index: 100;
+}
+
+.overlay-scrollbar .overlay-scrollbar-control-top {
+  right: 9px;
+  top: 10px;
+}
+
+.overlay-scrollbar .overlay-scrollbar-control-bottom {
+  right: 9px;
+  bottom: 10px;
 }
