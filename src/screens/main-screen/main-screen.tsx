@@ -1,9 +1,9 @@
-import { Popup } from "@/components/popup";
+import { WelcomePopup } from "./welcome-popup";
 
 export function MainScreen() {
   return (
     <div className="bg-background w-screen h-screen">
-      <Popup />
+      <WelcomePopup />
     </div>
   );
 }

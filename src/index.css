@@ -1,10 +1,25 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Ruslan-Display';
+  src: url(assets/fonts/RuslanDisplay-Regular.ttf);
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'AlumniSans';
+  src: url(assets/fonts/AlumniSans-Regular.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+
 @theme {
   /* Цвета */
   --color-background: #39373A;
   --color-primary: #A62B30;
   --color-secondary: #F4F5F0;
+  --color-text: #39373A;
 
   /* Радиус */
   --radius-radius50: 50px;
@@ -12,9 +27,27 @@
   /* Размеры */
   --spacing-popup-w: 540px;
   --spacing-popup-h: 547px;
-  --spacing-popup-icon-w: calc(145.35/540 * 100%);
-  --spacing-popup-icon-h: calc(145.35/547 * 100%);
+  --spacing-popup-icon-w: 145.35px;
+  --spacing-popup-icon-h: 145.35px;
 
-  /* Отступы */
-  --spacing-popup-icon-inset-top: 37px;
+  /* Шрифты */
+  --font-header: 'Ruslan-Display';
+  --font-text: 'AlumniSans';
+  --font-button: 'Ruslan-Display';
+
+  --text-header: 48px;
+  --text-p: 48px;
+  --text-button: 32px;
+
+  --shadow-button: 0 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary font-button px-[43px] pt-[22px] pb-[13px] text-button text-secondary rounded-[100px] shadow-button;
+  }
+
+  .btn-control {
+    @apply bg-primary opacity-80 w-[50px] h-[50px] rounded-full shadow-button;
+  }
 }
