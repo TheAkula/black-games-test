@@ -1,8 +1,15 @@
+import { motion } from "motion/react";
 import type { PropsWithChildren, ReactNode } from "react";
 
 export function Popup({ children, icon }: PropsWithChildren<PopupProps>) {
   return (
-    <div className="max-w-popup-w-sm max-h-popup-h-sm sm:max-w-popup-w sm:max-h-popup-h w-full h-full fixed left-[50%] -translate-x-1/2 top-[50%] -translate-y-1/2 p-[10px] sm:p-[20px]">
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9, y: 50 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.9, y: 50 }}
+      transition={{ type: "spring", damping: 25, stiffness: 300 }}
+      className="max-w-popup-w-sm max-h-popup-h-sm sm:max-w-popup-w sm:max-h-popup-h w-full h-full fixed left-[50%] -translate-x-1/2 top-[50%] -translate-y-1/2 p-[10px] sm:p-[20px]"
+    >
       <div className="relative w-full h-full flex flex-col items-center justify-center bg-secondary rounded-[50px] border-primary border-[10px] sm:border-[20px]">
         <div className="rounded-full z-10 w-popup-circle-w aspect-square position absolute bg-secondary -translate-y-1/3 top-0 left-[50%] -translate-x-1/2 border-primary border-[10px] sm:border-[20px]"></div>
         <div className="z-15 w-full h-full absolute bg-secondary sm:rounded-[30px] rounded-[40px] left-0 top-0"></div>
@@ -13,7 +20,7 @@ export function Popup({ children, icon }: PropsWithChildren<PopupProps>) {
           {children}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
