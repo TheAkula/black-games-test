@@ -54,47 +54,50 @@ export function WelcomePopup() {
   };
 
   return (
-    <Popup>
-      <div className="absolute w-full h-full">
-        <div className="flex flex-col items-center pt-[37px]">
-          {!showInnerContent ? (
-            <>
-              <PopupIconSVG className="w-popup-icon-w h-popup-icon-h" />
-              <h1 className="font-header leading-tight text-header text-text">
-                Добрый вечер
-              </h1>
-              <p className="font-text text-p pb-[33px]">
-                {currentContent.description}
-              </p>
-              <div className="flex flex-row gap-[24px] items-center">
-                <button
-                  className="btn-control relative btn-effects"
-                  onClick={selectPrevContent}
-                >
-                  <div className="left-[50%] top-[50%] -translate-x-1/2 -translate-1/2 absolute ">
-                    <ArrowSVG />
-                  </div>
-                </button>
-                <button
-                  className="btn-primary btn-effects"
-                  onClick={showInnerContentHandler}
-                >
-                  выбрать
-                </button>
-                <button
-                  className="btn-control relative btn-effects"
-                  onClick={selectNextContent}
-                >
-                  <div className="rotate-180 left-[50%] top-[50%] -translate-x-1/2 -translate-1/2 absolute ">
-                    <ArrowSVG />
-                  </div>
-                </button>
-              </div>
-            </>
-          ) : (
-            currentContent.innerContentBuilder()
-          )}
-        </div>
+    <Popup
+      icon={
+        <PopupIconSVG
+          className={`w-full h-full ${showInnerContent ? "rotate-180" : ""}`}
+        />
+      }
+    >
+      <div className="flex flex-col items-center">
+        {!showInnerContent ? (
+          <>
+            <h1 className="text-element-header whitespace-nowrap pt-[31px]">
+              Добрый вечер
+            </h1>
+            <p className="text-element-span pb-[33px]">
+              {currentContent.description}
+            </p>
+            <div className="flex flex-row gap-[16px] sm:gap-[24px] items-center">
+              <button
+                className="btn-control relative btn-effects"
+                onClick={selectPrevContent}
+              >
+                <div className="left-[50%] top-[50%] -translate-x-1/2 -translate-1/2 absolute ">
+                  <ArrowSVG className="w-full h-full" />
+                </div>
+              </button>
+              <button
+                className="btn-primary btn-effects"
+                onClick={showInnerContentHandler}
+              >
+                выбрать
+              </button>
+              <button
+                className="btn-control relative btn-effects"
+                onClick={selectNextContent}
+              >
+                <div className="rotate-180 left-[50%] top-[50%] -translate-x-1/2 -translate-1/2 absolute ">
+                  <ArrowSVG className="w-full h-full" />
+                </div>
+              </button>
+            </div>
+          </>
+        ) : (
+          currentContent.innerContentBuilder()
+        )}
       </div>
     </Popup>
   );
@@ -108,17 +111,20 @@ interface WelcomeContent {
 const ThinkContent = ({ onClose }: { onClose: VoidFunction }) => {
   return (
     <>
-      <PopupIconSVG className="w-popup-icon-w h-popup-icon-h rotate-180 mb-[7px]" />
       <Stars rating={0} />
-      <h1 className="font-header leading-tight text-header text-text mt-[6px]">
+      <h1 className="text-element-header mt-[6px] whitespace-nowrap">
         Добрый вечер
       </h1>
-      <p className="text-text font-text text-p">вот и думайте</p>
+      <p className="text-text font-text text-size-32 sm:text-size-48">
+        вот и думайте
+      </p>
       <button
-        className="btn-control flex justify-center items-center mt-[63px] btn-effects"
+        className="relative btn-control sm:mt-[63px] mt-[40px] btn-effects"
         onClick={onClose}
       >
-        <XSVG />
+        <div className="left-[50%] top-[50%] -translate-x-1/2 -translate-1/2 absolute">
+          <XSVG className="w-full h-full" />
+        </div>
       </button>
     </>
   );
@@ -127,15 +133,14 @@ const ThinkContent = ({ onClose }: { onClose: VoidFunction }) => {
 const MeanContent = ({ onClose }: { onClose: VoidFunction }) => {
   return (
     <>
-      <PopupIconSVG className="w-popup-icon-w h-popup-icon-h rotate-180 mb-[7px]" />
       <Stars rating={3} />
-      <h1 className="font-header leading-tight text-header text-text mt-[6.5px] mb-[10px]">
+      <h1 className="text-element-header mt-[6.5px] mb-[10px] whitespace-nowrap">
         Добрый вечер
       </h1>
-      <div className="max-w-scroll-text-max-width h-scroll-text-height mb-[16px]">
+      <div className="max-w-scroll-text-max-width-sm sm:max-w-scroll-text-max-width h-scroll-text-height-sm sm:h-scroll-text-height mb-[20px]">
         <ScrollText
           text={
-            <div className="pl-[20px] pr-[20px] py-[12px] text-text font-paragraph text-paragraph">
+            <div className="pl-[10px] pr-[10px] py-[6px] sm:pl-[20px] sm:pr-[20px] sm:py-[12px] text-text font-paragraph text-size-10">
               <p>Почему вообще люди ждут конца света?</p>
               <p>
                 И почему, если таковой предстоит, он обязательно должен быть для
@@ -160,10 +165,12 @@ const MeanContent = ({ onClose }: { onClose: VoidFunction }) => {
         />
       </div>
       <button
-        className="btn-control flex justify-center items-center btn-effects"
+        className="relative btn-control btn-effects"
         onClick={onClose}
       >
-        <XSVG />
+        <div className="left-[50%] top-[50%] -translate-x-1/2 -translate-1/2 absolute">
+          <XSVG className="w-full h-full" />
+        </div>
       </button>
     </>
   );

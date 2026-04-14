@@ -21,16 +21,17 @@
   --color-secondary: #F4F5F0;
   --color-text: #39373A;
 
-  /* Радиус */
-  --radius-radius50: 50px;
-
   /* Размеры */
-  --spacing-popup-w: 540px;
-  --spacing-popup-h: 547px;
-  --spacing-popup-icon-w: 145.35px;
-  --spacing-popup-icon-h: 145.35px;
+  --spacing-popup-w: 580px;
+  --spacing-popup-h: 480px;
+  --spacing-popup-w-sm: 400px;
+  --spacing-popup-h-sm: 320px;
   --spacing-scroll-text-max-width: 320px;
   --spacing-scroll-text-height: 150px;
+  --spacing-scroll-text-max-width-sm: 260px;
+  --spacing-scroll-text-height-sm: 100px;
+  --spacing-popup-circle-w: calc(357/500 * 100%);
+  --spacing-popup-icon-w: calc(145.35/500 * 100%);
 
   /* Шрифты */
   --font-header: 'Ruslan-Display';
@@ -38,10 +39,10 @@
   --font-button: 'Ruslan-Display';
   --font-paragraph: 'Inter', sans-serif;
 
-  --text-header: 48px;
-  --text-p: 48px;
-  --text-button: 32px;
-  --text-paragraph: 10px;
+  --text-size-48: 48px;
+  --text-size-32: 32px;
+  --text-size-10: 10px;
+  --text-size-20: 20px;
 
   --shadow-button: 0 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
@@ -52,11 +53,23 @@
   }
 
   .btn-primary {
-    @apply bg-primary font-button px-[43px] pt-[22px] pb-[13px] text-button text-secondary rounded-[100px] shadow-button;
+    @apply bg-primary font-button px-[20px] sm:pt-[22px] pt-[10px] sm:pb-[13px] pb-[5px] sm:px-[43px] text-size-20 sm:text-size-32 text-secondary rounded-[100px] shadow-button;
   }
 
   .btn-control {
-    @apply bg-primary/80 w-[50px] h-[50px] rounded-full shadow-button cursor-pointer;
+    @apply bg-primary/80 sm:w-[50px] sm:h-[50px] w-[30px] h-[30px] rounded-full shadow-button cursor-pointer;
+  }
+
+  .text-element-header {
+    @apply font-header leading-tight text-size-32 sm:text-size-48 text-text text-center;
+  }
+
+  .text-element-p {
+    @apply text-text font-paragraph sm:text-size-10;
+  }
+
+  .text-element-span {
+    @apply font-text text-size-32 sm:text-size-48 text-text;
   }
 }
 
