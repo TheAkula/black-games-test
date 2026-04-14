@@ -8,7 +8,7 @@ import { AnimatePresence, motion, type Variants } from "motion/react";
 import { useState, type ReactNode } from "react";
 
 export function WelcomePopup() {
-  const [contents, setContents] = useState<WelcomeContent[]>([
+  const [contents, _] = useState<WelcomeContent[]>([
     {
       innerContentBuilder: () => (
         <ThinkContent
