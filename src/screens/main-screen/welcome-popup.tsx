@@ -4,6 +4,7 @@ import { Stars } from "@/components/stars";
 import ArrowSVG from "@/icons/arrow";
 import PopupIconSVG from "@/icons/popup-icon";
 import XSVG from "@/icons/x";
+import { AnimatePresence, motion, type Variants } from "motion/react";
 import { useState, type ReactNode } from "react";
 
 export function WelcomePopup() {
@@ -56,48 +57,80 @@ export function WelcomePopup() {
   return (
     <Popup
       icon={
-        <PopupIconSVG
-          className={`w-full h-full ${showInnerContent ? "rotate-180" : ""}`}
-        />
+        <motion.div
+          animate={{
+            rotate: showInnerContent ? 540 : 0,
+            transition: { duration: 0.5 },
+          }}
+          className="w-full h-full"
+        >
+          <PopupIconSVG />
+        </motion.div>
       }
     >
       <div className="flex flex-col items-center">
-        {!showInnerContent ? (
-          <>
-            <h1 className="text-element-header whitespace-nowrap pt-[31px]">
-              Добрый вечер
-            </h1>
-            <p className="text-element-span pb-[33px]">
-              {currentContent.description}
-            </p>
-            <div className="flex flex-row gap-[16px] sm:gap-[24px] items-center">
-              <button
-                className="btn-control relative btn-effects"
-                onClick={selectPrevContent}
+        <AnimatePresence mode="wait">
+          {!showInnerContent ? (
+            <motion.div
+              key="content"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex flex-col items-center"
+            >
+              <h1 className="text-element-header whitespace-nowrap pt-[31px]">
+                Добрый вечер
+              </h1>
+              <motion.p
+                key={currentContent.description}
+                variants={containerAnimation}
+                initial="hidden"
+                animate="visible"
+                className="text-element-span flex overflow-hidden pb-[33px]"
               >
-                <div className="left-[50%] top-[50%] -translate-x-1/2 -translate-1/2 absolute ">
-                  <ArrowSVG className="w-full h-full" />
-                </div>
-              </button>
-              <button
-                className="btn-primary btn-effects"
-                onClick={showInnerContentHandler}
-              >
-                выбрать
-              </button>
-              <button
-                className="btn-control relative btn-effects"
-                onClick={selectNextContent}
-              >
-                <div className="rotate-180 left-[50%] top-[50%] -translate-x-1/2 -translate-1/2 absolute ">
-                  <ArrowSVG className="w-full h-full" />
-                </div>
-              </button>
-            </div>
-          </>
-        ) : (
-          currentContent.innerContentBuilder()
-        )}
+                {currentContent.description.split("").map((letter, index) => (
+                  <motion.span variants={childAnimation} key={index}>
+                    {letter === " " ? "\u00A0" : letter}
+                  </motion.span>
+                ))}
+              </motion.p>
+              <div className="flex flex-row gap-[16px] sm:gap-[24px] items-center">
+                <button
+                  className="btn-control relative btn-effects"
+                  onClick={selectPrevContent}
+                >
+                  <div className="left-[50%] top-[50%] -translate-x-1/2 -translate-1/2 absolute ">
+                    <ArrowSVG className="w-full h-full" />
+                  </div>
+                </button>
+                <button
+                  className="btn-primary btn-effects"
+                  onClick={showInnerContentHandler}
+                >
+                  выбрать
+                </button>
+                <button
+                  className="btn-control relative btn-effects"
+                  onClick={selectNextContent}
+                >
+                  <div className="rotate-180 left-[50%] top-[50%] -translate-x-1/2 -translate-1/2 absolute ">
+                    <ArrowSVG className="w-full h-full" />
+                  </div>
+                </button>
+              </div>
+            </motion.div>
+          ) : (
+            <motion.div
+              key="inner-content"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex flex-col items-center"
+            >
+              {currentContent.innerContentBuilder()}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </Popup>
   );
@@ -164,14 +197,31 @@ const MeanContent = ({ onClose }: { onClose: VoidFunction }) => {
           }
         />
       </div>
-      <button
-        className="relative btn-control btn-effects"
-        onClick={onClose}
-      >
+      <button className="relative btn-control btn-effects" onClick={onClose}>
         <div className="left-[50%] top-[50%] -translate-x-1/2 -translate-1/2 absolute">
           <XSVG className="w-full h-full" />
         </div>
       </button>
     </>
   );
+};
+
+const containerAnimation: Variants = {
+  hidden: { opacity: 0 },
+  visible: (i = 1) => ({
+    opacity: 1,
+    transition: { staggerChildren: 0.05, delayChildren: 0.04 * i },
+  }),
+};
+
+const childAnimation: Variants = {
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", damping: 12, stiffness: 200 },
+  },
+  hidden: {
+    opacity: 0,
+    y: -5,
+  },
 };
